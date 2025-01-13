@@ -4,10 +4,10 @@ namespace XunitTestExamples.Services;
 
 public class WeatherUserService
 {
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
     private readonly WeatherService _weatherService;
 
-    public WeatherUserService(UserService userService, WeatherService weatherService)
+    public WeatherUserService(IUserService userService, WeatherService weatherService)
     {
         _userService = userService;
         _weatherService = weatherService;
