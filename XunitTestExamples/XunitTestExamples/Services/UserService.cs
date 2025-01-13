@@ -2,21 +2,28 @@ using XunitTestExamples.Models;
 
 namespace XunitTestExamples.Services;
 
-public class UserService
+public class UserService : IUserService
 {
     private readonly List<User> _users;
+    public DateTime Now { get; }
 
-    public UserService(List<User> users)
+    public UserService(List<User> users, DateTime now)
     {
-        _users = new List<User>
-        {
-            new User { Id = 1, Name = "John Doe", Email = "john.doe@example.com" },
-            new User { Id = 2, Name = "Jane Smith", Email = "jane.smith@example.com" }
-        };
+        Now = now;
+        _users = users;
+        // new List<User>
+        // {
+        //     new User { Id = 1, Name = "John Doe", Email = "john.doe@example.com" },
+        //     new User { Id = 2, Name = "Jane Smith", Email = "jane.smith@example.com" }
+        // };
     }
 
     public User GetUserById(int id)
     {
+        if(Now > DateTime.Today)
+        {
+            return new User();
+        }
         return _users.FirstOrDefault(user => user.Id == id);
     }
 

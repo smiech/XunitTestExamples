@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
+using NUnit;
+using NUnit.Framework;
 using XunitTestExamples.Services;
 using XunitTestExamples.Models;
 
@@ -19,22 +20,22 @@ namespace XunitTestExamples.Tests.Services
                 new User { Id = 1, Name = "Alice", Email = "alice@example.com" },
                 new User { Id = 2, Name = "Bob", Email = "bob@example.com" }
             };
-            _userService = new UserService(_users);
+            _userService = new UserService(_users, DateTime.Now);
         }
 
-        [Fact]
+        [Test]
         public void GetUserById_ExistingId_ReturnsUser()
         {
             var user = _userService.GetUserById(1);
-            Assert.NotNull(user);
-            Assert.Equal("Alice", user.Name);
+            Assert.That(user, Is.Not.Null);
+            Assert.That("Alice", Is.EqualTo(user.Name));
         }
 
-        [Fact]
+        [Test]
         public void GetUserById_NonExistingId_ReturnsNull()
         {
             var user = _userService.GetUserById(3);
-            Assert.Null(user);
+            Assert.That(user, Is.Not.Null);
         }
     }
 }

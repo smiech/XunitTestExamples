@@ -7,7 +7,7 @@ namespace XunitTestExamples
     {
         public static void Main(string[] args)
         {
-            var userService = new UserService(new List<User>());
+            var userService = new UserService(new List<User>(), DateTime.Now);
             var weatherService = new WeatherService();
 
             // Example usage of UserService
